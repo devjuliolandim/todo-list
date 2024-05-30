@@ -6,6 +6,16 @@
     
 }
 
+:root{
+    --add-task: rgb(66, 66, 252);
+    --add-task-hover: rgb(52, 52, 206);
+
+    --delete-all: rgb(255, 47, 47);
+    --delete-all-hover: rgb(214, 39, 39);
+
+    --img-background: rgb(162, 162, 162);
+}
+
 body{
     background-color: #e4e8fe;
     display: flex;
@@ -33,13 +43,22 @@ button{
 }
 
 #add{
-    background-color: rgb(66, 66, 252);
+    background-color: var(--add-task);
+    transition: .5s;
+}
+
+#add:hover{
+    background-color: var(--add-task-hover);
 }
 
 #delete-all{
-    background-color: rgb(255, 47, 47);
+    background-color: var(--delete-all);
+    transition: .5s;
 }
 
+#delete-all:hover{
+    background-color: var(--delete-all-hover);
+}
 
 main{
     background-color: #d3d6eb;
@@ -62,8 +81,13 @@ li{
     display: flex;
     align-items: center;
 
-    margin: 20px;
+    margin: 15px;
     border-radius: 10px;
+}
+
+.task-info{
+    flex-grow: 2;
+    margin-left: 10px;
 }
 
 input[type = "checkbox"]{
@@ -71,6 +95,21 @@ input[type = "checkbox"]{
     height: 30px;
     width: 30px;
     margin: 10px;
+}
+
+.delete-edit{
+    display: flex;
+    gap: 10px;
+    margin-right: 10px;
+}
+
+img{
+    background-color: var(--img-background);
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    padding: 2px;
+    cursor: pointer;
 }
 
 @media (max-width: 500px) {
