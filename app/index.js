@@ -8,15 +8,32 @@ const PORT = 4000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//Functions
+
+function formatDate(date){
+
+    //       MM/DD/YYYY
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const year = date.getFullYear();
+
+    // HOURS
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${month}/${day}/${year} - ${hours}:${minutes}`
+}
+
 //Posts
 let posts = [
     {
         title: "Do the dishes",
-        date: new Date()
+        date: formatDate(new Date())
     },
     {
         title: "Clean the kitchen",
-        date: new Date()
+        date: formatDate(new Date())
     }
 ];
 
