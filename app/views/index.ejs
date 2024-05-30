@@ -12,7 +12,7 @@
 <body>
     <h1>TODO LIST</h1>
 
-    <div class="buttons-container">
+    <div class="container">
         <button id = "add">
             <a href="">Add Task</a>
         </button>
@@ -25,10 +25,39 @@
     <main>
         <ul>
             <li>
-                <input type="checkbox" name="" id="">
+                <input type="checkbox" name="" class="checkbox">
                 
                 <div class="task-info">
-                    <h2>Aprender React</h2>
+                    <h2 class = "task-title">Aprender React</h2>
+                    <small>30/05/2024</small>
+                </div>
+
+                <div class="delete-edit">
+                    <img src="img/del.png" alt="" class="del">
+                    <img src="img/edit.png" alt="" class="edit">
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" name="" class="checkbox">
+                
+                <div class="task-info">
+                    <h2 class = "task-title">Estudar JavaScript</h2>
+                    <small>30/05/2024</small>
+                </div>
+
+                <div class="delete-edit">
+                    <img src="img/del.png" alt="" class="del">
+                    <img src="img/edit.png" alt="" class="edit">
+                </div>
+            </li>
+
+
+            <li>
+                <input type="checkbox" name="" class="checkbox">
+                
+                <div class="task-info">
+                    <h2 class = "task-title">Aprender Angular</h2>
                     <small>30/05/2024</small>
                 </div>
 
@@ -40,6 +69,23 @@
         </ul>
     </main>
 
-    
+    <script>
+        const checkbox = document.querySelectorAll(".checkbox");
+        
+        checkbox.forEach(element => {
+            element.addEventListener("change", function(){
+
+                const taskTitle = this.closest('li').querySelector(".task-title");
+
+                if(this.checked){
+                    taskTitle.classList.add("line-through");
+                }else{
+                    taskTitle.classList.remove("line-through");
+                }
+
+            });
+        });
+        
+    </script>
 </body>
 </html>
