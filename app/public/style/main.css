@@ -125,6 +125,13 @@ img:hover{
     background-color: var(--img-background-hover);
 }
 
+@media (max-width: 900px){
+    .task-title{
+        font-size: 0.8rem;
+    }
+}
+
+
 @media (max-width: 620px) {
     .buttons-container{
         width: 80%;
@@ -132,9 +139,5 @@ img:hover{
 
     main{
         width: 80%;
-    }
-
-    .task-title{
-        font-size: 0.8rem;
-    }
+    } 
 }
