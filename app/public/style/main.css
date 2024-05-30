@@ -93,6 +93,8 @@ li{
 
 .line-through{
     text-decoration: line-through;
+    font-style: italic;
+    color: rgb(89, 89, 89);
 }
 
 input[type = "checkbox"]{
