@@ -11,13 +11,11 @@ app.use(bodyParser.json());
 //Posts
 let posts = [
     {
-        id: 1,
         title: "Do the dishes",
         date: new Date()
     },
     {
-        id: 2,
-        tite: "Clean the kitchen",
+        title: "Clean the kitchen",
         date: new Date()
     }
 ];
