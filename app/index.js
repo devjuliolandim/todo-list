@@ -28,14 +28,18 @@ function formatDate(date){
 //Posts
 let posts = [
     {
+        id: 1,
         title: "Do Add Task Button",
         date: formatDate(new Date())
     },
     {
+        id:2,
         title: "Clean the kitchen",
         date: formatDate(new Date())
     }
 ];
+
+let lastID = 2;
 
 app.get("/posts", (req, res)=>{
     res.json(posts);
@@ -45,7 +49,10 @@ app.post("/post", (req,res)=>{
     
     console.log(req.body);
     
+    lastID += 1;
+
     const newPost = {
+        id: lastID,
         title: req.body.title,
         date: formatDate(new Date())
     }

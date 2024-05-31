@@ -27,7 +27,6 @@ app.get("/new", (req, res)=>{
 });
 
 //POST A NEW TASK
-
 app.post("/api/post", async (req, res)=>{
     try{
         const response = await axios.post(API_URL + "/post", req.body);
@@ -37,6 +36,8 @@ app.post("/api/post", async (req, res)=>{
         res.status(404).send(err);
     }
 });
+
+//DELETE ROUTES
 
 app.listen(PORT, ()=>{
     console.log(`The server is running in the port ${PORT}`);
