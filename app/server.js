@@ -11,7 +11,6 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 app.get("/", async (req, res)=>{
    try{
     const response = await axios.get(API_URL + "/posts");
@@ -44,6 +43,16 @@ app.get("/api/delete/:id", async (req,res)=>{
         res.redirect("/");
     }catch(err){
         res.status(500).json({message: "Error deleting post"});
+    }
+});
+
+
+app.get("/delete-all",async (req,res)=>{
+    try{
+        await axios.delete(API_URL + "/delete-all");
+        res.redirect("/");
+    }catch(err){
+        res.status(404).json({message: "Error to Delete All"});
     }
 });
 

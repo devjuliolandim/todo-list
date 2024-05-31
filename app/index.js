@@ -41,10 +41,13 @@ let posts = [
 
 let lastID = 2;
 
+//Get all posts
 app.get("/posts", (req, res)=>{
     res.json(posts);
 });
 
+
+//Post a new task
 app.post("/post", (req,res)=>{
     console.log(req.body);
     
@@ -60,12 +63,20 @@ app.post("/post", (req,res)=>{
     res.status(201).json(posts);
 });
 
+//Delete an id Task
 app.delete("/delete/:id", (req, res)=>{
     const index = posts.findIndex((p)=> p.id === parseInt(req.params.id));
 
     posts.splice(index, 1);
     res.json({message: "Post Deleted"});
 });
+
+//Delete All tasks
+app.delete("/delete-all", (req,res)=>{
+    posts = [];
+    res.json({message: "All tasks deleted"});
+});
+
 
 app.listen(PORT, (req, res)=>{
     console.log(`The server is running in the port ${PORT}`);
