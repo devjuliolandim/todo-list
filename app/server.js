@@ -38,6 +38,14 @@ app.post("/api/post", async (req, res)=>{
 });
 
 //DELETE ROUTES
+app.get("/api/delete/:id", async (req,res)=>{
+    try{
+        await axios.delete(API_URL + "/delete/" + req.params.id);
+        res.redirect("/");
+    }catch(err){
+        res.status(500).json({message: "Error deleting post"});
+    }
+});
 
 app.listen(PORT, ()=>{
     console.log(`The server is running in the port ${PORT}`);

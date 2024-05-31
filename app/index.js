@@ -46,7 +46,6 @@ app.get("/posts", (req, res)=>{
 });
 
 app.post("/post", (req,res)=>{
-    
     console.log(req.body);
     
     lastID += 1;
@@ -59,6 +58,13 @@ app.post("/post", (req,res)=>{
 
     posts.push(newPost);
     res.status(201).json(posts);
+});
+
+app.delete("/delete/:id", (req, res)=>{
+    const index = posts.findIndex((p)=> p.id === parseInt(req.params.id));
+
+    posts.splice(index, 1);
+    res.json({message: "Post Deleted"});
 });
 
 app.listen(PORT, (req, res)=>{
