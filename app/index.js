@@ -25,8 +25,8 @@ function formatDate(date){
     return `${month}/${day}/${year} - ${hours}:${minutes}`
 }
 
-//Posts
-let posts = [
+//Tasks
+let tasks = [
     {
         id: 1,
         title: "Do Add Task Button",
@@ -41,9 +41,17 @@ let posts = [
 
 let lastID = 2;
 
-//Get all posts
-app.get("/posts", (req, res)=>{
-    res.json(posts);
+//Get all tasks
+app.get("/tasks", (req, res)=>{
+    res.json(tasks);
+});
+
+//Get a specific task
+app.get("/task/:id", (req,res)=>{
+    const id = parseInt(req.params.id);
+    const searchIndex = tasks.findIndex((p)=> p.id = id);
+
+    res.json(tasks[searchIndex]);
 });
 
 
@@ -59,21 +67,21 @@ app.post("/post", (req,res)=>{
         date: formatDate(new Date())
     }
 
-    posts.push(newPost);
-    res.status(201).json(posts);
+    tasks.push(newPost);
+    res.status(201).json(tasks);
 });
 
 //Delete an id Task
 app.delete("/delete/:id", (req, res)=>{
-    const index = posts.findIndex((p)=> p.id === parseInt(req.params.id));
+    const index = tasks.findIndex((p)=> p.id === parseInt(req.params.id));
 
-    posts.splice(index, 1);
+    tasks.splice(index, 1);
     res.json({message: "Post Deleted"});
 });
 
 //Delete All tasks
 app.delete("/delete-all", (req,res)=>{
-    posts = [];
+    tasks = [];
     res.json({message: "All tasks deleted"});
 });
 

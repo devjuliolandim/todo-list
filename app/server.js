@@ -6,14 +6,15 @@ const PORT = 3000;
 const app = express();
 const API_URL = "http://localhost:4000";
 
+//Middlewares
 app.use(express.static("public"));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//Route to get all tasks
 app.get("/", async (req, res)=>{
    try{
-    const response = await axios.get(API_URL + "/posts");
+    const response = await axios.get(API_URL + "/tasks");
     console.log(response.data);
     res.render("index.ejs", {data: response.data});
    }catch(err){
@@ -21,11 +22,14 @@ app.get("/", async (req, res)=>{
    }
 });
 
+
+//Route to get the addTask.ejs
 app.get("/new", (req, res)=>{
     res.render("addTask.ejs", {header: "ADD A NEW TASK"});
 });
 
-//POST A NEW TASK
+
+//Route to post a new task
 app.post("/api/post", async (req, res)=>{
     try{
         const response = await axios.post(API_URL + "/post", req.body);
@@ -36,7 +40,8 @@ app.post("/api/post", async (req, res)=>{
     }
 });
 
-//DELETE ROUTES
+
+//Route to delete a specific task
 app.get("/api/delete/:id", async (req,res)=>{
     try{
         await axios.delete(API_URL + "/delete/" + req.params.id);
@@ -47,6 +52,7 @@ app.get("/api/delete/:id", async (req,res)=>{
 });
 
 
+//Route to delete all tasks
 app.get("/delete-all",async (req,res)=>{
     try{
         await axios.delete(API_URL + "/delete-all");
