@@ -28,19 +28,19 @@
                 </div>
             </li> -->  
 
-            <% data.forEach(post=>{ %>
+            <% data.forEach(task=>{ %>
 
                 <li>
                     <input type="checkbox" name="" class="checkbox">
                     
                     <div class="task-info">
-                        <h2 class = "task-title"><%= post.title %></h2>
-                        <small> <%=post.date%> </small>
+                        <h2 class = "task-title"><%= task.title %></h2>
+                        <small> <%=task.date%> </small>
                     </div>
     
                     <div class="delete-edit">
-                        <a href="api/delete/<%= post.id %>"><img src="img/del.png" alt="" class="del"></a>
-                        <a href="#"><img src="img/edit.png" alt="" class="edit"></a>
+                        <a href="api/delete/<%= task.id %>"><img src="img/del.png" alt="" class="del"></a>
+                        <a href="edit/<%=task.id%>"><img src="img/edit.png" alt="" class="edit"></a>
                     </div>
                 </li>
             <% }); %>

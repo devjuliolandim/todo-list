@@ -40,6 +40,30 @@ app.post("/api/post", async (req, res)=>{
     }
 });
 
+//Route to render editTask.ejs
+app.get("/edit/:id", async (req, res)=>{
+    try{
+        const response = await axios.get(API_URL + "/task/" + req.params.id);
+        console.log(response.data);
+        res.render("editTask.ejs", {header: "EDIT TASK",task: response.data});
+    }catch(err){
+        res.status(404).send(err);
+    }
+});
+
+//Route to partially update tasks
+app.post("/api/tasks/:id", async (req,res)=>{
+    try{
+        const response = await axios.patch(API_URL + "/tasks/"+ req.params.id, req.body);
+        
+        console.log(response.data);
+
+        res.redirect("/");
+    }catch(err){
+        res.status(500).json({ message: "Error updating task" });
+    }
+});
+
 
 //Route to delete a specific task
 app.get("/api/delete/:id", async (req,res)=>{

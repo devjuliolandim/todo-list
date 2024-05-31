@@ -71,6 +71,17 @@ app.post("/post", (req,res)=>{
     res.status(201).json(tasks);
 });
 
+//Patch a task
+app.patch("/tasks/:id", (req,res)=>{
+    const task = tasks.find((p)=> p.id === parseInt(req.params.id));
+
+    if(!task) return res.status(404).json({message: "Error to find task"});
+
+    if(req.body.title) task.title = req.body.title;
+
+    res.json(task);
+});
+
 //Delete an id Task
 app.delete("/delete/:id", (req, res)=>{
     const index = tasks.findIndex((p)=> p.id === parseInt(req.params.id));
