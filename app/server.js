@@ -22,6 +22,22 @@ app.get("/", async (req, res)=>{
    }
 });
 
+app.get("/new", (req, res)=>{
+    res.render("addTask.ejs", {header: "ADD A NEW TASK"});
+});
+
+//POST A NEW TASK
+
+app.post("/api/post", async (req, res)=>{
+    try{
+        const response = await axios.post(API_URL + "/post", req.body);
+        console.log(response.data);
+        res.redirect("/");
+    }catch(err){
+        res.status(404).send(err);
+    }
+});
+
 app.listen(PORT, ()=>{
     console.log(`The server is running in the port ${PORT}`);
 });

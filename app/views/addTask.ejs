@@ -1,0 +1,18 @@
+<%- include("./partials/header.ejs") %>
+    
+    <h1><%= header %></h1>
+
+    <form action="/api/post" method="post">
+
+        <label for="title">Task-Name:</label>
+
+        <input type="text" name="title" id="title" placeholder="Type the task name"> 
+
+
+        <input type="submit" value="Submit Task">
+        
+    </form>
+
+
+</body>
+</html>

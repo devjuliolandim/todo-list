@@ -125,6 +125,36 @@ img:hover{
     background-color: var(--img-background-hover);
 }
 
+form{
+    background-color: rgb(241, 241, 241);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+input[type = "text"]{
+    border-radius: 10px;
+    padding: 2px;
+}
+
+input[type= "submit"]{
+    display: block;
+    margin: 20px auto 5px auto;
+    padding: 10px;
+    color: white;
+    background-color: var(--add-task);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    transition: .5s;
+}
+
+input[type = "submit"]:hover{
+    background-color: var(--add-task-hover);
+}
+
+
+
 @media (max-width: 900px){
     .task-title{
         font-size: 0.8rem;

@@ -28,7 +28,7 @@ function formatDate(date){
 //Posts
 let posts = [
     {
-        title: "Do the dishes",
+        title: "Do Add Task Button",
         date: formatDate(new Date())
     },
     {
@@ -39,6 +39,19 @@ let posts = [
 
 app.get("/posts", (req, res)=>{
     res.json(posts);
+});
+
+app.post("/post", (req,res)=>{
+    
+    console.log(req.body);
+    
+    const newPost = {
+        title: req.body.title,
+        date: formatDate(new Date())
+    }
+
+    posts.push(newPost);
+    res.status(201).json(posts);
 });
 
 app.listen(PORT, (req, res)=>{
