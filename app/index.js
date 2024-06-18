@@ -48,6 +48,22 @@ async function fetchDatabase(){
     }
 }
 
+async function getOneTask(id){
+    try{
+        const result = await db.query("SELECT title FROM todo_list WHERE id = $1", [id]);
+
+        if(result.rows.length > 0){
+            return result.rows[0];
+        }else{
+            return false;
+        }
+
+    }catch(err){
+        console.error("Internal Server Error", err);
+        throw new Error("Internal Server Error");
+    }
+}
+
 async function insertIntoDatabase(newTask){
     try{
         await db.query("INSERT INTO todo_list (title,date) VALUES ($1,$2)", [newTask.title, newTask.date]);
@@ -110,11 +126,13 @@ app.get("/tasks", async (req, res)=>{
 });
 
 //Get a specific task
-app.get("/task/:id", (req,res)=>{
-    const id = parseInt(req.params.id);
-    const searchIndex = tasks.findIndex((p)=> p.id = id);
-
-    res.json(tasks[searchIndex]);
+app.get("/task/:id", async (req,res)=>{
+    if(req.params.id){
+        const taskTitle = await getOneTask(req.params.id);
+        res.json(taskTitle);
+    }else{  
+        res.json({message: "Id not found"});
+    }
 });
 
 //Post a new task
