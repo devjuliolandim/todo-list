@@ -83,6 +83,23 @@ async function deleteOneTask(id){
     }
 }
 
+async function deleteAll(){
+    try{
+        const result = await db.query("DELETE FROM todo_list");
+
+        if(result.rowCount > 0){
+            console.log("Sucess to delete all!");
+            return true;
+        }else{
+            console.log("Error to delete all");
+            return false;
+        }
+    }catch(err){
+        console.error("Error deleting all data", err);
+        throw new Error("Internal Server Error");
+    }
+}
+
 //Tasks
 let tasks = [];
 
@@ -132,9 +149,9 @@ app.delete("/delete/:id", async (req, res)=>{
 });
 
 //Delete All tasks
-app.delete("/delete-all", (req,res)=>{
-    tasks = [];
-    res.json({message: "All tasks deleted"});
+app.delete("/delete-all", async (req,res)=>{
+    if(!await deleteAll()) return res.json({message:"Error deleting all tasks"});
+    res.json({message: "All tasks deleted!"});
 });
 
 app.listen(PORT, (req, res)=>{
