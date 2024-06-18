@@ -1,15 +1,29 @@
 import express from "express";
 import bodyParser from "body-parser";
+import pg from "pg";
+import env from "dotenv";
+
 
 const app = express();
 const PORT = 4000;
+
+env.config();
+
+const db = new pg.Client({
+    user: process.env.POSTGRES_USER,
+    host: process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DATABASE,
+    password: process.env.POSTGRES_PASSWORD,
+    port: process.env.POSTGRES_PORT
+});
+
+db.connect();
 
 //MiddleWare
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //Functions
-
 function formatDate(date){
 
     //       MM/DD/YYYY
@@ -24,6 +38,15 @@ function formatDate(date){
 
     return `${month}/${day}/${year} - ${hours}:${minutes}`
 }
+
+//Async Functions
+/*async function fetchDatabase(){
+    try{
+        const result = await db
+    }catch(err){
+        console.error("An error has ocurred fetching the database", err);
+    }
+}*/
 
 //Tasks
 let tasks = [
