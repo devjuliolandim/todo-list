@@ -209,6 +209,11 @@ input[type = "submit"]:hover{
     .task-title{
         font-size: 0.8rem;
     }
+
+    dialog > .container{
+        width: 100%;
+        gap: 10px;
+    }
 }
 
 
@@ -219,5 +224,6 @@ input[type = "submit"]:hover{
 
     main{
         width: 80%;
-    } 
+    }
+    
 }
