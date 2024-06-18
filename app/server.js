@@ -22,12 +22,10 @@ app.get("/", async (req, res)=>{
    }
 });
 
-
 //Route to get the addTask.ejs
 app.get("/new", (req, res)=>{
     res.render("addTask.ejs", {header: "ADD A NEW TASK"});
 });
-
 
 //Route to post a new task
 app.post("/api/post", async (req, res)=>{
@@ -55,15 +53,12 @@ app.get("/edit/:id", async (req, res)=>{
 app.post("/api/tasks/:id", async (req,res)=>{
     try{
         const response = await axios.patch(API_URL + "/tasks/"+ req.params.id, req.body);
-        
         console.log(response.data);
-
         res.redirect("/");
     }catch(err){
         res.status(500).json({ message: "Error updating task" });
     }
 });
-
 
 //Route to delete a specific task
 app.get("/api/delete/:id", async (req,res)=>{
@@ -74,7 +69,6 @@ app.get("/api/delete/:id", async (req,res)=>{
         res.status(500).json({message: "Error deleting post"});
     }
 });
-
 
 //Route to delete all tasks
 app.get("/delete-all",async (req,res)=>{

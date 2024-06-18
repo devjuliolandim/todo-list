@@ -56,6 +56,20 @@ async function insertIntoDatabase(newTask){
     }
 }
 
+async function alterTable(newTask){
+    try{
+        const task = await db.query("UPDATE todo_list SET title = $1, date = $2 WHERE id = $3 RETURNING *", [newTask.title, newTask.date, newTask.id]);
+        if(task.rows.length > 0){
+            return task.rows[0];
+        }else{
+            return {message: "Task not found"}
+        }
+    }catch(err){
+        console.error("An error has occured altering the table", err);
+        throw new Error("Internet Server Error");
+    }
+}
+
 async function deleteOneTask(id){
     try{
         const res = await db.query("DELETE FROM todo_list WHERE id = $1", [id]);
@@ -97,14 +111,18 @@ app.post("/post", async (req,res)=>{
 });
 
 //Patch a task
-app.patch("/tasks/:id", (req,res)=>{
-    const task = tasks.find((p)=> p.id === parseInt(req.params.id));
-
-    if(!task) return res.status(404).json({message: "Error to find task"});
-
-    if(req.body.title) task.title = req.body.title;
-
-    res.json(task);
+app.patch("/tasks/:id", async (req,res)=>{
+    if(!req.body.title){
+        return res.status(404).json({message: "Title is required"});
+    }else{
+        const newTask = {
+            id: req.params.id,
+            title: req.body.title,
+            date: formatDate(new Date())
+        };
+        const result = await alterTable(newTask);
+        res.json(result);
+    }
 });
 
 //Delete an id Task
