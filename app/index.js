@@ -48,10 +48,16 @@ async function fetchDatabase(){
     }
 }
 
+async function insertIntoDatabase(newTask){
+    try{
+        await db.query("INSERT INTO todo_list (title,date) VALUES ($1,$2)", [newTask.title, newTask.date]);
+    }catch(err){
+        console.error("An error has occured inserting data into DB", err);
+    }
+}
+
 //Tasks
 let tasks = [];
-
-let lastID = 2;
 
 //Get all tasks
 app.get("/tasks", async (req, res)=>{
@@ -67,20 +73,13 @@ app.get("/task/:id", (req,res)=>{
     res.json(tasks[searchIndex]);
 });
 
-
 //Post a new task
-app.post("/post", (req,res)=>{
-    console.log(req.body);
-    
-    lastID += 1;
-
+app.post("/post", async (req,res)=>{
     const newPost = {
-        id: lastID,
         title: req.body.title,
         date: formatDate(new Date())
     }
-
-    tasks.push(newPost);
+    await insertIntoDatabase(newPost);
     res.status(201).json(tasks);
 });
 
@@ -108,7 +107,6 @@ app.delete("/delete-all", (req,res)=>{
     tasks = [];
     res.json({message: "All tasks deleted"});
 });
-
 
 app.listen(PORT, (req, res)=>{
     console.log(`The server is running in the port ${PORT}`);
