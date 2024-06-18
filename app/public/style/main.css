@@ -15,10 +15,12 @@
 
     --img-background: rgb(162, 162, 162);
     --img-background-hover: rgb(119, 119, 119);
+
+    --background-color: #e4e8fe;
 }
 
 body{
-    background-color: #e4e8fe;
+    background-color: var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;
