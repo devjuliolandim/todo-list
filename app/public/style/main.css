@@ -33,6 +33,37 @@ button{
     padding: 10px;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+dialog::backdrop{
+    background-color: rgb(0 0 0 / .7);
+}
+
+dialog{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 25px;
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+dialog > *{
+    margin-bottom: 20px;
+}
+
+dialog > p{
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+dialog > .container{
+    width: 80%;
+    margin: auto;
 }
 
 .container{
@@ -46,21 +77,23 @@ button{
     color: white;
 }
 
-#add{
+.add{
     background-color: var(--add-task);
     transition: .5s;
+    color: white;
 }
 
-#add:hover{
+.add:hover{
     background-color: var(--add-task-hover);
 }
 
-#delete-all{
+.delete-all{
     background-color: var(--delete-all);
     transition: .5s;
+    color: white;
 }
 
-#delete-all:hover{
+.delete-all:hover{
     background-color: var(--delete-all-hover);
 }
 

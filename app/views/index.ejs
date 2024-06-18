@@ -3,14 +3,25 @@
     <h1>TODO LIST</h1>
 
     <div class="container">
-        <button id = "add">
+        <button class = "add">
             <a href="/new">Add Task</a>
         </button>
 
-        <button id = "delete-all">
-            <a href="/delete-all">Delete All</a>
+        <button class = "delete-all" onclick="showModal()">
+            Delete All
         </button>
     </div>
+
+    <dialog>
+        <h2>Do you want delete all tasks?</h2>
+        <p>This action can't be undone!</p>
+
+        <div class="container">
+            <button class="add" onclick="closeModal()">Nevermind</button>
+
+            <button class="delete-all"><a href="/delete-all">I want to delete!</a></button>
+        </div>
+    </dialog>
 
     <main>
         <ul>
@@ -49,6 +60,8 @@
 
     <script>
         const checkbox = document.querySelectorAll(".checkbox");
+        const modal = document.querySelector("dialog");
+
         
         checkbox.forEach(element => {
             element.addEventListener("change", function(){
@@ -64,6 +77,14 @@
             });
         });
         
+        function showModal(){
+            modal.showModal();
+        }
+
+        function closeModal(){
+            modal.close();
+        }
+
     </script>
 </body>
 </html>
