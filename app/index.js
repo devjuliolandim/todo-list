@@ -56,6 +56,19 @@ async function insertIntoDatabase(newTask){
     }
 }
 
+async function deleteOneTask(id){
+    try{
+        const res = await db.query("DELETE FROM todo_list WHERE id = $1", [id]);
+        if(res.rowCount){ 
+            console.log("Row Deleted!")
+        }else{
+            console.log("Failed to delete row");
+        }
+    }catch(err){
+        console.error("An error has occured deleting task");
+    }
+}
+
 //Tasks
 let tasks = [];
 
@@ -95,10 +108,8 @@ app.patch("/tasks/:id", (req,res)=>{
 });
 
 //Delete an id Task
-app.delete("/delete/:id", (req, res)=>{
-    const index = tasks.findIndex((p)=> p.id === parseInt(req.params.id));
-
-    tasks.splice(index, 1);
+app.delete("/delete/:id", async (req, res)=>{
+    await deleteOneTask(req.params.id);
     res.json({message: "Post Deleted"});
 });
 
