@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import pg from "pg";
 import env from "dotenv";
 
-
 const app = express();
 const PORT = 4000;
 
@@ -40,32 +39,23 @@ function formatDate(date){
 }
 
 //Async Functions
-/*async function fetchDatabase(){
+async function fetchDatabase(){
     try{
-        const result = await db
+        const result = await db.query("SELECT * FROM todo_list");
+        tasks = result.rows;
     }catch(err){
         console.error("An error has ocurred fetching the database", err);
     }
-}*/
+}
 
 //Tasks
-let tasks = [
-    {
-        id: 1,
-        title: "Do Add Task Button",
-        date: formatDate(new Date())
-    },
-    {
-        id:2,
-        title: "Clean the kitchen",
-        date: formatDate(new Date())
-    }
-];
+let tasks = [];
 
 let lastID = 2;
 
 //Get all tasks
-app.get("/tasks", (req, res)=>{
+app.get("/tasks", async (req, res)=>{
+    await fetchDatabase();
     res.json(tasks);
 });
 
