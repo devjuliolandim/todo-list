@@ -17,6 +17,7 @@
     --img-background-hover: rgb(119, 119, 119);
 
     --background-color: #e4e8fe;
+    --form-background-color: rgb(241, 241, 241);
 }
 
 body{
@@ -128,7 +129,7 @@ img:hover{
 }
 
 form{
-    background-color: rgb(241, 241, 241);
+    background-color: var(--form-background-color);
     padding: 25px;
     border-radius: 20px;
 }
