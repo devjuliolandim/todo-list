@@ -18,6 +18,9 @@
 
     --background-color: #e4e8fe;
     --form-background-color: rgb(250, 250, 250);
+
+    --main-paragraph: rgb(0, 0, 0);
+    --main-span: blue;
 }
 
 body{
@@ -106,6 +109,17 @@ main{
     border-radius: 10px;
 
     overflow-y: auto;
+}
+
+main > p{
+    font-weight: 700;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--main-paragraph);
+}
+
+main span{
+    color: var(--main-span);
 }
 
 li{

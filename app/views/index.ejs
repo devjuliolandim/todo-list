@@ -24,21 +24,8 @@
     </dialog>
 
     <main>
+        <% if(locals.data && locals.data.length > 0) {%>
         <ul>
-      <!--    <li>
-                <input type="checkbox" name="" class="checkbox">
-                
-                <div class="task-info">
-                    <h2 class = "task-title">Aprender React</h2>
-                    <small>30/05/2024</small>
-                </div>
-
-                <div class="delete-edit">
-                    <img src="img/del.png" alt="" class="del">
-                    <img src="img/edit.png" alt="" class="edit">
-                </div>
-            </li> -->  
-
             <% data.forEach(task=>{ %>
 
                 <li>
@@ -56,6 +43,11 @@
                 </li>
             <% }); %>
         </ul>
+        <%}else {%>
+
+            <p>To add a new task click in the <span>"Add Task"</span> button!</p>
+
+        <%} %>
     </main>
 
     <script>
